@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Header from "./Header";
+import { validateForm } from "../utils/validate";
+import {
+  signIn,
+  signUp,
+  needHelpLabel,
+  rememberMeLabel,
+  signInLabel,
+  signUpLabel,
+} from "../constants/constants";
 
 const Login = () => {
   let [isSignInForm, setIsSignInForm] = useState(true);
   let [isCheckBoxToggle, setIsCheckBoxToggle] = useState(false);
+  let [isFormCheck, setIsFormCheck] = useState(null);
+  let nameRef = useRef(null);
+  let emailRef = useRef(null);
+  let passwordRef = useRef(null);
 
   let toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
@@ -13,8 +26,15 @@ const Login = () => {
     setIsCheckBoxToggle(!isCheckBoxToggle);
   };
 
-  let signIn = "Sign In";
-  let signUp = "Sign Up";
+  let handleFormValidation = () => {
+    let formRes = validateForm(
+      emailRef.current.value,
+      passwordRef.current.value,
+      nameRef?.current?.value,
+      isSignInForm
+    );
+    setIsFormCheck(formRes);
+  };
 
   return (
     <div>
@@ -25,28 +45,40 @@ const Login = () => {
           alt="Netflix-Image"
         />
       </div>
-      <form className="bg-gradient-to-b from-black-500 w-4/12 absolute p-12 bg-stone-950 my-36 mx-auto right-0 left-0 align-middle text-white bg-opacity-90">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault(); //Imp for form submission/validation
+        }}
+        className="bg-gradient-to-b from-black-500 w-4/12 absolute p-12 bg-stone-950 my-36 mx-auto right-0 left-0 align-middle text-white bg-opacity-90"
+      >
         <h2 className="text-3xl font-bold p-2">
           {isSignInForm ? signIn : signUp}
         </h2>
         {!isSignInForm && (
           <input
+            ref={nameRef}
             type="text"
             placeholder="Full Name"
             className="p-3 my-2 bg-gray-800 w-full rounded-lg"
           ></input>
         )}
         <input
+          ref={emailRef}
           type="text"
           placeholder="Email or phone number"
           className="p-3 my-2 bg-gray-800 w-full rounded-lg"
         ></input>
         <input
+          ref={passwordRef}
           type="password"
           placeholder="Password"
           className="p-3 my-2 bg-gray-800 w-full rounded-lg"
         ></input>
-        <button className="p-2 my-4 bg-red-600 w-full rounded-lg">
+        <p className="text-red-500 text-bold">{isFormCheck}</p>
+        <button
+          className="p-2 my-4 bg-red-600 w-full rounded-lg"
+          onClick={handleFormValidation}
+        >
           {isSignInForm ? signIn : signUp}
         </button>
         <label className="form-checkbox h-5 w-5">
@@ -55,20 +87,13 @@ const Login = () => {
             checked={isCheckBoxToggle}
             onChange={toggleCheckBox}
           ></input>
-          Remember Me
-          {console.log(isCheckBoxToggle)}
+          {rememberMeLabel}
         </label>
         <p className="inline float-right">
-          <a href="">Need Help?</a>
+          <a href="">{needHelpLabel}</a>
         </p>
         <p onClick={toggleSignInForm} className="cursor-pointer mt-8">
-          {isSignInForm ? (
-            <p className="text-gray whitespace-pre">
-              New to Netflix? Sign-up now.
-            </p>
-          ) : (
-            "Already Registered? Sign In Now"
-          )}
+          {isSignInForm ? signInLabel : signUpLabel}
         </p>
       </form>
     </div>
