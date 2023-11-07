@@ -3,10 +3,16 @@ import Header from "./Header";
 
 const Login = () => {
   let [isSignInForm, setIsSignInForm] = useState(true);
+  let [isCheckBoxToggle, setIsCheckBoxToggle] = useState(false);
 
   let toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
   };
+
+  let toggleCheckBox = () => {
+    setIsCheckBoxToggle(!isCheckBoxToggle);
+  };
+
   let signIn = "Sign In";
   let signUp = "Sign Up";
 
@@ -19,10 +25,17 @@ const Login = () => {
           alt="Netflix-Image"
         />
       </div>
-      <form className="bg-gradient-to-b from-black-500 w-5/12 absolute p-12 bg-stone-950 my-36 mx-auto right-0 left-0 align-middle text-white bg-opacity-90">
-        <h2 className="text-3xl font-bold p-3">
+      <form className="bg-gradient-to-b from-black-500 w-4/12 absolute p-12 bg-stone-950 my-36 mx-auto right-0 left-0 align-middle text-white bg-opacity-90">
+        <h2 className="text-3xl font-bold p-2">
           {isSignInForm ? signIn : signUp}
         </h2>
+        {!isSignInForm && (
+          <input
+            type="text"
+            placeholder="Full Name"
+            className="p-3 my-2 bg-gray-800 w-full rounded-lg"
+          ></input>
+        )}
         <input
           type="text"
           placeholder="Email or phone number"
@@ -36,15 +49,26 @@ const Login = () => {
         <button className="p-2 my-4 bg-red-600 w-full rounded-lg">
           {isSignInForm ? signIn : signUp}
         </button>
-        <label className="inline">
-          <input type="checkbox"></input>Remember Me
+        <label className="form-checkbox h-5 w-5">
+          <input
+            type="checkbox"
+            checked={isCheckBoxToggle}
+            onChange={toggleCheckBox}
+          ></input>
+          Remember Me
+          {console.log(isCheckBoxToggle)}
         </label>
-        <p className="inline float-right"><a href="">Need Help?</a></p>
-        <p className="whitespace-nowrap text-gray">
-          New to Netflix?{" "}
-          <a onClick={toggleSignInForm} href="">
-            Sign-up now.
-          </a>
+        <p className="inline float-right">
+          <a href="">Need Help?</a>
+        </p>
+        <p onClick={toggleSignInForm} className="cursor-pointer mt-8">
+          {isSignInForm ? (
+            <p className="text-gray whitespace-pre">
+              New to Netflix? Sign-up now.
+            </p>
+          ) : (
+            "Already Registered? Sign In Now"
+          )}
         </p>
       </form>
     </div>
