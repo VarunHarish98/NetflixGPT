@@ -1,10 +1,16 @@
 import { auth } from "./firebase";
 import {
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
-  } from "firebase/auth";
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
-export const fireBaseAuth = (formRes, email, password, isSignInForm, setIsFormCheck) => {
+export const fireBaseAuth = (
+  formRes,
+  email,
+  password,
+  isSignInForm,
+  setIsFormCheck
+) => {
   if (!formRes) {
     if (!isSignInForm) {
       //Sign-up logic
@@ -13,14 +19,12 @@ export const fireBaseAuth = (formRes, email, password, isSignInForm, setIsFormCh
           // Signed up
           const user = userCredential.user;
           console.log(user);
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(error);
           setIsFormCheck(`${errorMessage} - ${errorCode}`);
-          // ..
         });
     } else {
       //Sign-In Logic
@@ -29,7 +33,6 @@ export const fireBaseAuth = (formRes, email, password, isSignInForm, setIsFormCh
           // Signed in
           const user = userCredential.user;
           console.log(user);
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code;
