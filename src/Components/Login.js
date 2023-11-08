@@ -1,16 +1,18 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
 import { validateForm } from "../utils/validate";
+
 import {
   signIn,
   signUp,
   needHelpLabel,
   rememberMeLabel,
   signInLabel,
-  signUpLabel,
+  signUpLabel
 } from "../constants/constants";
+import fireBaseAuth from "../config/firebaseAuth"
 
-const Login = () => {
+export const Login = () => {
   let [isSignInForm, setIsSignInForm] = useState(true);
   let [isCheckBoxToggle, setIsCheckBoxToggle] = useState(false);
   let [isFormCheck, setIsFormCheck] = useState(null);
@@ -34,6 +36,9 @@ const Login = () => {
       isSignInForm
     );
     setIsFormCheck(formRes);
+
+    //For Sign-In / Sign-Up Logic
+    fireBaseAuth(formRes, emailRef.current.value, passwordRef.current.value);
   };
 
   return (
@@ -42,8 +47,7 @@ const Login = () => {
       <div className="absolute">
         <img
           src="https://assets.nflxext.com/ffe/siteui/vlv3/ab4b0b22-2ddf-4d48-ae88-c201ae0267e2/384d70af-0a67-470f-a87d-8cd53438e26f/US-en-20231030-popsignuptwoweeks-perspective_alpha_website_medium.jpg"
-          alt="Netflix-Image"
-        />
+          alt="Netflix-Image" />
       </div>
       <form
         onSubmit={(e) => {
@@ -99,5 +103,3 @@ const Login = () => {
     </div>
   );
 };
-
-export default Login;
