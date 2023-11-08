@@ -4,7 +4,7 @@ import {
     signInWithEmailAndPassword
   } from "firebase/auth";
 
-export const fireBaseAuth = (formRes, email, password) => {
+export const fireBaseAuth = (formRes, email, password, isSignInForm, setIsFormCheck) => {
   if (!formRes) {
     if (!isSignInForm) {
       //Sign-up logic

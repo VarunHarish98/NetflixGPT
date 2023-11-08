@@ -8,9 +8,9 @@ import {
   needHelpLabel,
   rememberMeLabel,
   signInLabel,
-  signUpLabel
+  signUpLabel,
 } from "../constants/constants";
-import fireBaseAuth from "../config/firebaseAuth"
+import { fireBaseAuth } from "../config/firebaseAuth";
 
 export const Login = () => {
   let [isSignInForm, setIsSignInForm] = useState(true);
@@ -38,7 +38,13 @@ export const Login = () => {
     setIsFormCheck(formRes);
 
     //For Sign-In / Sign-Up Logic
-    fireBaseAuth(formRes, emailRef.current.value, passwordRef.current.value);
+    fireBaseAuth(
+      formRes,
+      emailRef.current.value,
+      passwordRef.current.value,
+      isSignInForm,
+      setIsFormCheck
+    );
   };
 
   return (
@@ -47,7 +53,8 @@ export const Login = () => {
       <div className="absolute">
         <img
           src="https://assets.nflxext.com/ffe/siteui/vlv3/ab4b0b22-2ddf-4d48-ae88-c201ae0267e2/384d70af-0a67-470f-a87d-8cd53438e26f/US-en-20231030-popsignuptwoweeks-perspective_alpha_website_medium.jpg"
-          alt="Netflix-Image" />
+          alt="Netflix-Image"
+        />
       </div>
       <form
         onSubmit={(e) => {
