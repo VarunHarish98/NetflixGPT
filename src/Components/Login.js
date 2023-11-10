@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
 import { validateForm } from "../utils/validate";
-
 import {
   signIn,
   signUp,
@@ -10,12 +9,18 @@ import {
   signInLabel,
   signUpLabel,
 } from "../constants/constants";
-import { fireBaseAuth } from "../config/firebaseAuth";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../config/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 export const Login = () => {
   let [isSignInForm, setIsSignInForm] = useState(true);
   let [isCheckBoxToggle, setIsCheckBoxToggle] = useState(false);
   let [isFormCheck, setIsFormCheck] = useState(null);
+  let navigate = useNavigate();
   let nameRef = useRef(null);
   let emailRef = useRef(null);
   let passwordRef = useRef(null);
@@ -36,15 +41,40 @@ export const Login = () => {
       isSignInForm
     );
     setIsFormCheck(formRes);
-
+    let email = emailRef?.current?.value;
+    let password = passwordRef?.current?.value;
     //For Sign-In / Sign-Up Logic
-    fireBaseAuth(
-      formRes,
-      emailRef.current.value,
-      passwordRef.current.value,
-      isSignInForm,
-      setIsFormCheck
-    );
+    if (!isSignInForm) {
+      //Sign-up logic
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          navigate("/browse");
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(error);
+          setIsFormCheck(`${errorMessage} - ${errorCode}`);
+        });
+    } else {
+      //Sign-In Logic
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          navigate("/browse");
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(error);
+          setIsFormCheck(`${errorMessage} - ${errorCode}`);
+        });
+    }
   };
 
   return (
