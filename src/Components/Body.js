@@ -28,7 +28,7 @@ const Body = () => {
         // https://firebase.google.com/docs/reference/js/auth.user
         const { uid, email, displayName } = user;
         dispatch(addUser({ uid, email, displayName })); // ...
-        //navigate("/browse"); // WHen User signed out, navigate to browse page
+        //navigate("/browse"); // WHen User signed out, navigate to browse page - can't be added as it is not under React Component
       } else {
         // User is signed out
         dispatch(removerUser());
