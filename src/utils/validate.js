@@ -16,3 +16,7 @@ export const validateForm = (email, password, name = "", isSignIn) => {
   if (!isPassword) return validPassword;
   return null;
 };
+
+export const setErrorMessage = (error) => {
+  return error?.message || error?.value || error;
+};

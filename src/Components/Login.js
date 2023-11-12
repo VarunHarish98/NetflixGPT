@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
-import { validateForm } from "../utils/validate";
+import { setErrorMessage, validateForm } from "../utils/validate";
 import {
   signIn,
   signUp,
@@ -14,7 +14,10 @@ import { auth } from "../config/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { addUser } from "../redux/userSlice";
 
 export const Login = () => {
   let [isSignInForm, setIsSignInForm] = useState(true);
@@ -24,7 +27,7 @@ export const Login = () => {
   let nameRef = useRef(null);
   let emailRef = useRef(null);
   let passwordRef = useRef(null);
-
+  let dispatch = useDispatch();
   let toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
   };
@@ -50,7 +53,23 @@ export const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          navigate("/browse");
+          updateProfile(user, {
+            displayName: nameRef.current.value,
+            photoURL: "random Url (To-Do)",
+          })
+            .then(() => {
+              // Profile updated!
+              // ...
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(addUser({ uid, email, displayName, photoURL }));
+              navigate("/browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              console.log(setErrorMessage(error));
+              // ...
+            });
+
           console.log(user);
         })
         .catch((error) => {
@@ -79,7 +98,7 @@ export const Login = () => {
 
   return (
     <div>
-      <Header isSignInForm={isSignInForm}/>
+      <Header isSignInForm={isSignInForm} />
       <div className="absolute">
         <img
           src="https://assets.nflxext.com/ffe/siteui/vlv3/ab4b0b22-2ddf-4d48-ae88-c201ae0267e2/384d70af-0a67-470f-a87d-8cd53438e26f/US-en-20231030-popsignuptwoweeks-perspective_alpha_website_medium.jpg"
