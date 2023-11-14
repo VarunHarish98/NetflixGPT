@@ -1,16 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "./Header";
-import { nowPlayingAPI } from "../APIs/api";
+import useNowPlayingMovies from "../customHooks/useNowPlayingMovies";
 
 const Browse = () => {
-  const getNowPlayingAPI = async () => {
-    const data = await fetch('https://api.themoviedb.org/3/movie/now_playing?page=1', nowPlayingAPI)
-    const json = await data?.json();
-    console.log(json);
-  }
-  useEffect(() => {
-    getNowPlayingAPI()
-  }, []); //Call only once;
+  useNowPlayingMovies();
   return (
     <div>
       <Header />

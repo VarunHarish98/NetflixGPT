@@ -7,7 +7,8 @@ import reportWebVitals from "./reportWebVitals";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-     {/* Happens in local only - twice the call, not in production */}
+     {/* Happens in local only - twice the call, not in production - React does extra rendering to check 
+     inconsistency in local, due to strict mode*/}
     <App />
   </React.StrictMode>
 );
