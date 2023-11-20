@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { apiOptions } from "../constants/constants";
 
 const VideoBackground = (movieId) => {
+  let trailerDataKey = ''
   const getMovieVideos = async () => {
     let data = await fetch(
       `https://api.themoviedb.org/3/movie/976573/videos?language=en-US`,
@@ -22,7 +23,7 @@ const VideoBackground = (movieId) => {
   return (
     <div>
       <iframe
-        src={`https://www.youtube.com/embed/${trailerDataKey}`}
+        src={'https://www.youtube.com/embed/' + trailerDataKey}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       ></iframe>
     </div>
