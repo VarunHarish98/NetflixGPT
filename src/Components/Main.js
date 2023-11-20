@@ -8,7 +8,7 @@ const Main = () => {
   if (!movies) return null;
   const mainMovie = movies[0];
   const { original_title, overview, id } = mainMovie;
-  console.log(mainMovie);
+  //console.log(id);
   return (
     <div>
       <VideoTitle title={original_title} overview={overview} />
