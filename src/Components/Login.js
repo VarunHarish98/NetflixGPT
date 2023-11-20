@@ -70,7 +70,7 @@ export const Login = () => {
               // ...
             });
 
-          console.log(user);
+          //console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -85,7 +85,7 @@ export const Login = () => {
           // Signed in
           const user = userCredential.user;
           navigate("/browse");
-          console.log(user);
+          //console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;

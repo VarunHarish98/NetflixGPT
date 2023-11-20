@@ -9,9 +9,10 @@ const VideoBackground = (movieId) => {
   let url = `https://www.youtube.com/embed/${trailerVideoKey}`;
   //console.log(url);
   return (
-    <div>
+    <div className="w-screen">
       <iframe
-        src={url}
+        className="w-screen aspect-video"
+        src={url + "?&autoplay=1&mute=1"}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       ></iframe>
     </div>
