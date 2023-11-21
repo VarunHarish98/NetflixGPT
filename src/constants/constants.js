@@ -10,6 +10,7 @@ export const signUpLabel = "Already Registered? Sign In Now";
 export const emailRegex = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 export const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 export const nameRegex = /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/;
+export const tmdbURL = "https://image.tmdb.org/t/p/original/";
 export const apiOptions = {
   method: "GET",
   headers: {
