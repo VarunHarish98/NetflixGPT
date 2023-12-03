@@ -2,9 +2,11 @@ import React from "react";
 import { auth } from "../config/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleGPTSearchView } from "../redux/gptSlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
   const handleSignout = () => {
@@ -18,6 +20,9 @@ const Header = () => {
         // An error happened - even then navigate.
       });
   };
+  const handleGPTSearch = () => {
+    dispatch(toggleGPTSearchView())
+  }
 
   return (
     <div className="absolute justify-between flex w-screen px-8 py-2 bg-gradient-to-b from-black-800 z-10">
@@ -28,6 +33,9 @@ const Header = () => {
       />
       {user && (
         <div className="flex p-4">
+          <button onClick={handleGPTSearch} className="p-2 m-2 bg-blue rounded-lg text-white">
+            Search-GPT
+          </button>
           <img
             alt="User-Icon"
             className="w-14 h-14"
