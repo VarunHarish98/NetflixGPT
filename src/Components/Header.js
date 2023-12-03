@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { auth } from "../config/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleGPTSearchView } from "../redux/gptSlice";
+import { LANG_SUPPORTED } from "../constants/constants";
+import lang from "../constants/languageConstants";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [language, setlanguage] = useState("en");
   const user = useSelector((store) => store.user);
   const handleSignout = () => {
     signOut(auth)
@@ -21,8 +24,8 @@ const Header = () => {
       });
   };
   const handleGPTSearch = () => {
-    dispatch(toggleGPTSearchView())
-  }
+    dispatch(toggleGPTSearchView());
+  };
 
   return (
     <div className="absolute justify-between flex w-screen px-8 py-2 bg-gradient-to-b from-black-800 z-10">
@@ -31,9 +34,21 @@ const Header = () => {
         src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
         alt="Logo"
       />
+
       {user && (
         <div className="flex p-4">
-          <button onClick={handleGPTSearch} className="p-2 m-2 bg-blue rounded-lg text-white">
+          <select className="p-2 m-2 bg-red-600 text-white rounded-lg">
+            {LANG_SUPPORTED.map((lang) => (
+              <option key={lang.identifier} value={lang.identifier}>
+                {lang.name}
+              </option>
+              
+            ))}
+          </select>
+          <button
+            onClick={handleGPTSearch}
+            className="p-4 m-2 bg-red-600 rounded-lg text-white"
+          >
             Search-GPT
           </button>
           <img
@@ -51,3 +66,4 @@ const Header = () => {
 };
 
 export default Header;
+  
