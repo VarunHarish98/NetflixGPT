@@ -4,14 +4,18 @@ import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleGPTSearchView } from "../redux/gptSlice";
-import { LANG_SUPPORTED } from "../constants/constants";
-import lang from "../constants/languageConstants";
+import {
+  GPTButtonName,
+  GPTHomepage,
+  LANG_SUPPORTED,
+} from "../constants/constants";
+import { saveUserLanguage } from "../redux/appSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [language, setlanguage] = useState("en");
   const user = useSelector((store) => store.user);
+  const showGPTButton = useSelector((store) => store.gpt?.showGPTSearch);
   const handleSignout = () => {
     signOut(auth)
       .then(() => {
@@ -26,6 +30,9 @@ const Header = () => {
   const handleGPTSearch = () => {
     dispatch(toggleGPTSearchView());
   };
+  const handleOnChange = (e) => {
+    dispatch(saveUserLanguage(e.target?.value));
+  };
 
   return (
     <div className="absolute justify-between flex w-screen px-8 py-2 bg-gradient-to-b from-black-800 z-10">
@@ -37,19 +44,23 @@ const Header = () => {
 
       {user && (
         <div className="flex p-4">
-          <select className="p-2 m-2 bg-red-600 text-white rounded-lg">
-            {LANG_SUPPORTED.map((lang) => (
-              <option key={lang.identifier} value={lang.identifier}>
-                {lang.name}
-              </option>
-              
-            ))}
-          </select>
+          {showGPTButton && (
+            <select
+              className="p-2 m-2 bg-red-600 text-white rounded-lg"
+              onChange={handleOnChange}
+            >
+              {LANG_SUPPORTED.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
           <button
             onClick={handleGPTSearch}
             className="p-4 m-2 bg-red-600 rounded-lg text-white"
           >
-            Search-GPT
+            {showGPTButton ? GPTHomepage : GPTButtonName}
           </button>
           <img
             alt="User-Icon"
@@ -66,4 +77,3 @@ const Header = () => {
 };
 
 export default Header;
-  

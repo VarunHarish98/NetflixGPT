@@ -36,3 +36,5 @@ export const LANG_SUPPORTED = [
     name: "Hindi",
   },
 ];
+export const GPTButtonName = "Search-GPT";
+export const GPTHomepage = "Homepage";

@@ -1,8 +1,11 @@
 import React from "react";
 import { netflixBackground } from "../constants/constants";
 import lang from "../constants/languageConstants";
+import { useSelector } from "react-redux";
 
 const GPTSearchBar = () => {
+  let language = useSelector((store) => store.appConfig?.lang);
+  language = lang[language] || 'en';
   return (
     <div className="">
       <img
@@ -15,10 +18,10 @@ const GPTSearchBar = () => {
         <input
           type="text"
           className="p-4 col-span-10 h-16 text-black text-2xl rounded-lg"
-          placeholder={lang.ka.placeHolder}
+          placeholder={language?.placeHolder}
         />
         <button className="p-4 bg-red-700 text-white rounded-lg col-span-2 text-2xl">
-          {lang.ka.search}
+          {language?.search}
         </button>
       </form>
     </div>
