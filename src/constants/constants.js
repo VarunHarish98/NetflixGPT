@@ -38,3 +38,4 @@ export const LANG_SUPPORTED = [
 ];
 export const GPTButtonName = "Search-GPT";
 export const GPTHomepage = "Homepage";
+export const OPEN_AI_KEY = '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'
