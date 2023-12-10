@@ -27,7 +27,7 @@ const GPTSearchBar = () => {
     e.preventDefault();
     console.log(searchText.current.value);
     //Call to OpenAI Call to get movie results
-    const gptQuery = `Act as a movie recommendation system and suggest 5 movie names for the query ${searchText.current.value} comma seperated without numbering or side bullets`;
+    const gptQuery = `Act as a movie recommendation system and suggest 5 movie names for the query ${searchText.current.value} with only comma seperated between movies `;
     const gptResults = await openai.chat.completions.create({
       messages: [{ role: "user", content: gptQuery }],
       model: "gpt-3.5-turbo",
