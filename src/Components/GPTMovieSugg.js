@@ -8,7 +8,7 @@ export const GPTMovieSugg = () => {
   );
   
   return (
-    <div className="relative top-[calc(50%+2rem)] left-1/2 transform -translate-x-1/2 translate-y-1/4 text-center p-4 m-4 bg-black text-white text-2xl">
+    <div className="relative top-[calc(50%+2rem)] left-1/2 transform -translate-x-1/2 translate-y-1/4 text-center p-4 m-4 text-white text-2xl">
       {console.log(searchMovieResults?.[0]?.[0].results)}
       <MovieList title={movieList?.[0]} movies={searchMovieResults?.[0]?.[0].results}/>
       <MovieList title={movieList?.[1]} movies={searchMovieResults?.[1]?.[0].results}/>
