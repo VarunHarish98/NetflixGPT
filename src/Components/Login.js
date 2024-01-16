@@ -45,6 +45,8 @@ export const Login = () => {
       isSignInForm
     );
     setIsFormCheck(formRes);
+    //To check if the FirstName not exists, return, prevent further creation of Account
+    if (!isSignInForm && !nameRef?.current?.value) return;
     let email = emailRef?.current?.value;
     let password = passwordRef?.current?.value;
     //For Sign-In / Sign-Up Logic
@@ -101,10 +103,7 @@ export const Login = () => {
     <div>
       <Header isSignInForm={isSignInForm} />
       <div className="absolute">
-        <img
-          src={netflixBackground}
-          alt="Netflix-Image"
-        />
+        <img src={netflixBackground} alt="Netflix-Image" />
       </div>
       <form
         onSubmit={(e) => {

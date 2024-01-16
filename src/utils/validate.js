@@ -5,16 +5,18 @@ import {
   emailRegex,
   passwordRegex,
   nameRegex,
+  signIn,
 } from "../constants/constants";
 
-export const validateForm = (email, password, name = "", isSignIn) => {
+export const validateForm = (email, password, name , isSignIn) => {
   let isEmail = emailRegex.test(email);
   let isPassword = passwordRegex.test(password);
   let isName = nameRegex.test(name);
   console.log(isName)
-  if (isSignIn && !isName) return validName;
   if (!isEmail) return validEmail;
   if (!isPassword) return validPassword;
+  // if(!signIn)
+  if (!isSignIn && !isName) return validName;
   return null;
 };
 

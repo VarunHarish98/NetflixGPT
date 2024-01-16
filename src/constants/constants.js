@@ -38,5 +38,5 @@ export const LANG_SUPPORTED = [
 ];
 export const GPTButtonName = "Search-GPT";
 export const GPTHomepage = "Homepage";
-// export const OPEN_AI_KEY = process.env.REACT_APP_OPEN_AI_KEY || "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"  
+
 
