@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { auth } from "../config/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
   const showGPTButton = useSelector((store) => store.gpt?.showGPTSearch);
+
   const handleSignout = () => {
     signOut(auth)
       .then(() => {
@@ -27,21 +28,22 @@ const Header = () => {
         // An error happened - even then navigate.
       });
   };
+
   const handleGPTSearch = () => {
     dispatch(toggleGPTSearchView());
   };
+
   const handleOnChange = (e) => {
     dispatch(saveUserLanguage(e.target?.value));
   };
 
   return (
-    <div className="bg-gradient-to-r from black-700 flex relative w-screen z-10">
+    <div className="relative">
       <img
-        className="top-0 left-0 absolute w-44"
+        className="absolute top-0 left-0 w-44"
         src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
         alt="Logo"
       />
-
       {user && (
         <div className="flex absolute top-0 right-0 p-4 z-10">
           {showGPTButton && (
