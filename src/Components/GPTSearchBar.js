@@ -10,6 +10,7 @@ import {
 const searchMovie = async (movie) => {
   let movieLists = [];
   console.log(movie);
+  console.log(process.env)
   const data = await fetch(
     "https://api.themoviedb.org/3/search/movie?query=" + movie,
     apiOptions

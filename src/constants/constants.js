@@ -1,3 +1,5 @@
+// import 'dotenv/config'
+// require('dotenv').config()
 export const signIn = "Sign In";
 export const signUp = "Sign Up";
 export const needHelpLabel = "Need Help?";
@@ -38,5 +40,6 @@ export const LANG_SUPPORTED = [
 ];
 export const GPTButtonName = "Search-GPT";
 export const GPTHomepage = "Homepage";
+
 
 
