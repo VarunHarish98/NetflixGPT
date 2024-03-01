@@ -17,7 +17,7 @@ const VideoTitle = ({ title, overview }) => {
         <button className="mx-2 text-xl bg-gray-500 text-white p-4 px-12 bg-opacity-500 rounded-lg hover:opacity-80" onClick={toggleModal}>
           ℹ More Info
         </button>
-        {isModal && <Modal id={1234} onClose={toggleModal} visible={isModal}/>}
+        {/* {isModal && <Modal id={1234} onClose={toggleModal} visible={isModal}/>} */}
       </div>
     </div>
   );
