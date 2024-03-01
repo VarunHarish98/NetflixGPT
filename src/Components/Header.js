@@ -45,7 +45,7 @@ const Header = () => {
         alt="Logo"
       />
       {user && (
-        <div className="flex absolute top-0 right-0 p-4 z-10">
+        <div className="flex absolute top-0 right-0 p-4 space-x-2 z-10">
           {showGPTButton && (
             <select
               className="p-2 m-2 bg-red-600 text-white rounded-lg max-w-xs md:max-w-md w-auto"
@@ -60,13 +60,13 @@ const Header = () => {
           )}
           <button
             onClick={handleGPTSearch}
-            className="p-4 m-2 bg-red-600 rounded-lg text-white w-auto"
+            className="p-4 top-2 bg-red-600 rounded-lg text-white w-auto"
           >
             {showGPTButton ? GPTHomepage : GPTButtonName}
           </button>
           <img
             alt="User-Icon"
-            className="w-14 h-14"
+            className="w-14 h-14 rounded-lg"
             src="https://wallpapers.com/images/high/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.webp"
           />
           <button
