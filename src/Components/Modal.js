@@ -13,7 +13,7 @@ const Modal = ({ onClose, visible, id }) => {
       className="fixed inset-0 flex items-center justify-center backdrop-blur"
       onClick={onCloseEvent}
     >
-      <div className="bg-black text-white p-4 w-96 h-96 rounded shadow-lg">
+      <div className="bg-black text-white p-4 w-3/5 h-3/5 rounded-sm border-2	rounded shadow-lg">
         <ModalCard id={id} />
       </div>
       <div className="absolute top-0 right-0">
