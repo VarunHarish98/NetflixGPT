@@ -5,7 +5,7 @@ import { tmdbURL } from "../constants/constants";
 
 const ModalCard = ({ id }) => {
   const movieDetails = useSelector((store) => store.movies);
-  console.log()
+  // console.log()
   // let movieList = movieDetails["topRatedMovies"]?.filter((item) => item["id"] === id) || movieDetails["nowPlayingMovies"]?.filter((item) => item["id"] === id) || movieDetails["popularMovies"]?.filter((item) => item["id"] === id) || movieDetails["topRatedMovies"]?.filter((item) => item["id"] === id) || movieDetails["upcomingMovies"]?.filter((item) => item["id"] === id)
   
   
@@ -36,7 +36,7 @@ const ModalCard = ({ id }) => {
             </p>
             <div className="flex space-x-2">
               <p className="font-bold flex"> Rating - </p>
-              <div>{Math.round(movieList?.vote_average, 2)}/10</div>
+              <div>{Math.round(movieList?.vote_average)}/10</div>
             </div>
 
           </div>
