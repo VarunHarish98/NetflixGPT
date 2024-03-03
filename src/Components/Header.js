@@ -48,7 +48,7 @@ const Header = () => {
         <div className="flex absolute top-0 right-0 p-4 space-x-2 z-10">
           {showGPTButton && (
             <select
-              className="p-2 m-2 bg-red-600 text-white rounded-lg max-w-xs md:max-w-md w-auto"
+              className="p-4 bg-red-600 text-white rounded-lg max-w-xs md:max-w-md w-auto"
               onChange={handleOnChange}
             >
               {LANG_SUPPORTED.map((lang) => (
@@ -71,7 +71,7 @@ const Header = () => {
           />
           <button
             onClick={handleSignout}
-            className="top-0 right-0 font-bold text-white"
+            className="top-0 right-0 font-bold text-white bg-purple-600 rounded-lg p-4"
           >
             Sign-Out
           </button>
