@@ -23,7 +23,8 @@ import { addUser } from "../redux/userSlice";
 export const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [isCheckBoxToggle, setIsCheckBoxToggle] = useState(false);
-  const [isFormCheck, setIsFormCheck] = useState(null);
+  const [isFormCheck, setIsFormCheck] = useState(null);  
+  const [guest, setGuest] = useState(false);
   const navigate = useNavigate();
   const nameRef = useRef(null);
   const emailRef = useRef(null);
@@ -37,6 +38,12 @@ export const Login = () => {
   const toggleCheckBox = () => {
     setIsCheckBoxToggle(!isCheckBoxToggle);
   };
+
+  const handleGuest = () => {
+    setGuest(true)
+    dispatch(addUser({ uid: "Guest", email :"Guest", displayName : "Guest", photoURL: "Guest" }));
+    navigate("/browse");
+  }
 
   const handleFormValidation = () => {
     const formRes = validateForm(
@@ -150,8 +157,7 @@ export const Login = () => {
           />
           {rememberMeLabel}
         </label>
-        <p className="text-right">
-          <a href="">{needHelpLabel}</a>
+        <p className="text-right" onClick={handleGuest}>{needHelpLabel}
         </p>
         <p
           onClick={toggleSignInForm}
