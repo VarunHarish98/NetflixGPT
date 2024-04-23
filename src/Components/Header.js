@@ -10,6 +10,12 @@ import {
   LANG_SUPPORTED,
 } from "../constants/constants";
 import { saveUserLanguage } from "../redux/appSlice";
+import { motion } from 'framer-motion'
+
+const variants = {
+  visible: { opacity: 1 },
+  hidden: { opacity: 0 },
+}
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -45,18 +51,21 @@ const Header = () => {
         alt="Logo"
       />
       {user && (
-        <div className="flex absolute top-0 right-0 p-4 space-x-2 z-10">
+        <motion.div className="flex absolute top-0 right-0 p-4 space-x-2 z-10" variants={{ variants }}
+          initial="hidden"
+          animate="visible">
           {showGPTButton && (
-            <select
+            <motion.select
               className="p-4 bg-red-600 text-white rounded-lg max-w-xs md:max-w-md w-auto"
               onChange={handleOnChange}
+              variants={variants}
             >
               {LANG_SUPPORTED.map((lang) => (
-                <option key={lang.identifier} value={lang.identifier}>
+                <motion.option key={lang.identifier} value={lang.identifier} variants={variants}>
                   {lang.name}
-                </option>
+                </motion.option>
               ))}
-            </select>
+            </motion.select>
           )}
           <button
             onClick={handleGPTSearch}
@@ -75,7 +84,7 @@ const Header = () => {
           >
             Sign-Out
           </button>
-        </div>
+        </motion.div>
       )}
     </div>
   );
