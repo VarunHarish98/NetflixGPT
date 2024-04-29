@@ -78,12 +78,12 @@ const Header = () => {
             className="w-14 h-14 rounded-lg"
             src="https://wallpapers.com/images/high/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.webp"
           />
-          <button
+          {user.uid != 'Guest' && <button
             onClick={handleSignout}
             className="top-0 right-0 font-bold text-white bg-purple-600 rounded-lg p-4"
           >
             Sign-Out
-          </button>
+          </button>}
         </motion.div>
       )}
     </div>

@@ -148,7 +148,14 @@ export const Login = () => {
         >
           {isSignInForm ? signIn : signUp}
         </button>
-        <label className="flex items-center">
+        <button
+          className="p-2 my-4 bg-purple-600 w-full rounded-lg"
+          onClick={handleGuest}
+        >
+          {needHelpLabel}
+        </button>
+        {/* Yet to Implement functionality of Checkbox and Need Help Modal */}
+        {/* <label className="flex items-center">
           <input
             type="checkbox"
             checked={isCheckBoxToggle}
@@ -158,7 +165,7 @@ export const Login = () => {
           {rememberMeLabel}
         </label>
         <p className="text-right" onClick={handleGuest}>{needHelpLabel}
-        </p>
+        </p> */}
         <p
           onClick={toggleSignInForm}
           className="cursor-pointer mt-8 text-center"
