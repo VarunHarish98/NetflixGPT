@@ -28,7 +28,7 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         navigate("/");
-        clickStreamEvent("Sign-Out", "Sign-Out", "Click")
+        clickStreamEvent("Sign-Out", "Click","Sign-Out" )
         // Sign-out successful.
       })
       .catch((error) => {
@@ -39,7 +39,7 @@ const Header = () => {
 
   const handleGPTSearch = () => {
     dispatch(toggleGPTSearchView());
-    clickStreamEvent("GPT Search", "GPT Search", "Click")
+    clickStreamEvent("GPT Search","GPT Search","Click")
 
     
   };

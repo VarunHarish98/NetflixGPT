@@ -41,7 +41,7 @@ export const Login = () => {
   };
 
   const handleGuest = () => {
-    clickStreamEvent("Guest-Login", "Guest-Login", "Click")
+    clickStreamEvent("Guest-Login", "Click", "Guest-Login")
     setGuest(true)
     dispatch(addUser({ uid: "Guest", email: "Guest", displayName: "Guest", photoURL: "Guest" }));
     navigate("/browse");
@@ -77,7 +77,7 @@ export const Login = () => {
               // Profile updated!
               const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(addUser({ uid, email, displayName, photoURL }));
-              clickStreamEvent("Sign-Up", "Sign-Up", "Click")
+              clickStreamEvent("Sign-Up" , "Click","Sign-Up")
               navigate("/browse");
             })
             .catch((error) => {
@@ -96,7 +96,7 @@ export const Login = () => {
         .then(() => {
           // Signed in
           navigate("/browse");
-          clickStreamEvent("Sign-In", "Sign-In", "Click")
+          clickStreamEvent("Sign-In", "Click","Sign-In")
 
         })
         .catch((error) => {
