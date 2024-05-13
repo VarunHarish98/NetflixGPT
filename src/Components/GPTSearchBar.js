@@ -6,6 +6,7 @@ import openai from "../utils/openai";
 import {
   setSearchMovieList
 } from "../redux/searchMovieSlice";
+import { clickStreamEvent } from "../utils/click-stream";
 
 const searchMovie = async (movie) => {
   let movieLists = [];
@@ -25,6 +26,8 @@ const GPTSearchBar = () => {
   const handleGPTSearchSubmit = async (e) => {
     e.preventDefault();
     console.log(searchText.current.value);
+    clickStreamEvent("Search_GPT", "Search_GPT", "Click")
+
     //Call to OpenAI Call to get movie results
     const gptQuery = `Act as a movie recommendation system and suggest 5 movie names for the query ${searchText.current.value} with only comma seperated between movies and no numbering for movie names `;
     const gptResults = await openai.chat.completions.create({
@@ -43,7 +46,7 @@ const GPTSearchBar = () => {
       movieList.map((movie) => searchMovie(movie))
     );
     dispatch(
-      setSearchMovieList({searchMovieList, movieList })
+      setSearchMovieList({ searchMovieList, movieList })
     );
   };
   language = lang[language] || "en";

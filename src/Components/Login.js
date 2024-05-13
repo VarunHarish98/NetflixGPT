@@ -19,11 +19,12 @@ import {
 } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../redux/userSlice";
+import { clickStreamEvent } from "../utils/click-stream";
 
 export const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [isCheckBoxToggle, setIsCheckBoxToggle] = useState(false);
-  const [isFormCheck, setIsFormCheck] = useState(null);  
+  const [isFormCheck, setIsFormCheck] = useState(null);
   const [guest, setGuest] = useState(false);
   const navigate = useNavigate();
   const nameRef = useRef(null);
@@ -40,8 +41,9 @@ export const Login = () => {
   };
 
   const handleGuest = () => {
+    clickStreamEvent("Guest-Login", "Guest-Login", "Click")
     setGuest(true)
-    dispatch(addUser({ uid: "Guest", email :"Guest", displayName : "Guest", photoURL: "Guest" }));
+    dispatch(addUser({ uid: "Guest", email: "Guest", displayName: "Guest", photoURL: "Guest" }));
     navigate("/browse");
   }
 
@@ -75,6 +77,7 @@ export const Login = () => {
               // Profile updated!
               const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(addUser({ uid, email, displayName, photoURL }));
+              clickStreamEvent("Sign-Up", "Sign-Up", "Click")
               navigate("/browse");
             })
             .catch((error) => {
@@ -93,6 +96,8 @@ export const Login = () => {
         .then(() => {
           // Signed in
           navigate("/browse");
+          clickStreamEvent("Sign-In", "Sign-In", "Click")
+
         })
         .catch((error) => {
           const errorCode = error.code;

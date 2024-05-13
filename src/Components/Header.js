@@ -11,6 +11,7 @@ import {
 } from "../constants/constants";
 import { saveUserLanguage } from "../redux/appSlice";
 import { motion } from 'framer-motion'
+import { clickStreamEvent } from "../utils/click-stream";
 
 const variants = {
   visible: { opacity: 1 },
@@ -27,6 +28,7 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         navigate("/");
+        clickStreamEvent("Sign-Out", "Sign-Out", "Click")
         // Sign-out successful.
       })
       .catch((error) => {
@@ -37,6 +39,9 @@ const Header = () => {
 
   const handleGPTSearch = () => {
     dispatch(toggleGPTSearchView());
+    clickStreamEvent("GPT Search", "GPT Search", "Click")
+
+    
   };
 
   const handleOnChange = (e) => {
